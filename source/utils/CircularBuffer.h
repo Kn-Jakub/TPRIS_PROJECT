@@ -8,7 +8,8 @@
 #ifndef CIRCULARBUFFER_H_
 #define CIRCULARBUFFER_H_
 #include <stddef.h>
-#include <sys/_stdint.h>
+#include <stdint.h>
+
 
 
 enum {
