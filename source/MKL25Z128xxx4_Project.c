@@ -32,6 +32,7 @@
  * @file    MKL25Z128xxx4_Project.c
  * @brief   Application entry point.
  */
+#include <CircularBufferUart.h>
 #include <stdio.h>
 #include "board.h"
 #include "peripherals.h"
@@ -39,6 +40,7 @@
 #include "clock_config.h"
 #include "MKL25Z4.h"
 #include "fsl_debug_console.h"
+
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -46,6 +48,9 @@
 /*
  * @brief   Application entry point.
  */
+
+
+
 int main(void) {
 
   	/* Init board hardware. */
@@ -55,7 +60,11 @@ int main(void) {
   	/* Init FSL debug console. */
     BOARD_InitDebugConsole();
 
-    PRINTF("Hello World\n");
+    CBufferUart_Init();
+
+    printf("Hello World\n");
+
+
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
