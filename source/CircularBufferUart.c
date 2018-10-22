@@ -35,14 +35,36 @@ void UART0_IRQHandler(void) {
 		}
 		LPSCI_ClearStatusFlags(base, kLPSCI_TxDataRegEmptyFlag);
 	}
+	 /* If RX overrun. */
+	if (UART0_S1_OR_MASK & base->S1)
+	   {
+	        while (UART0_S1_RDRF_MASK & base->S1)
+	        {
+	            (void)base->D;
+	        }
 
+	        LPSCI_ClearStatusFlags(base, kLPSCI_RxOverrunFlag);
+	}
+
+	/* Receive data register full */
+	if ((UART0_S1_RDRF_MASK & base->S1) && (UART0_C2_RIE_MASK & base->C2))
+	    {
+		uint8_t outBuffer;
+		outBuffer = base->D;
+//		LPSCI_ClearStatusFlags(base, kLPSCI_RxDataRegFullFlag);
+	    }
+
+//	if(base->S1 & kLPSCI_RxOverrunFlag){
+//
+//	}
+//	LPSCI_ClearStatusFlags(base, kLPSCI_AllInterruptsEnable);
 }
 
 // Redefine __sys_write to handle printf output
 int __sys_write(int iFileHandle, char *pcBuffer, int iLength) {
 	// Write String to BUFFER
 	int size = bufferWrite(&cBuffer, (uint8_t *)pcBuffer, iLength);
-	LPSCI_EnableInterrupts(UART0, kLPSCI_TxDataRegEmptyInterruptEnable /* kLPSCI_TransmissionCompleteInterruptEnable | kLPSCI_RxOverrunInterruptEnable*/);
+	LPSCI_EnableInterrupts(UART0, kLPSCI_TxDataRegEmptyInterruptEnable | kLPSCI_RxOverrunInterruptEnable /* kLPSCI_TransmissionCompleteInterruptEnable | kLPSCI_RxOverrunInterruptEnable*/);
 	return iLength - size;
 
 }
@@ -58,6 +80,8 @@ void CBufferUart_Init() {
 	LPSCI_Init(UART0, &user_config, CLOCK_GetFreq(kCLOCK_PllFllSelClk));
 	LPSCI_DisableInterrupts(UART0, kLPSCI_AllInterruptsEnable);
 
+	/* Enable LPSCI RX IRQ if previously enabled. */
+	LPSCI_EnableInterrupts(UART0, kLPSCI_RxDataRegFullInterruptEnable);
 
 	/* Enable interrupt in NVIC. */
 	EnableIRQ(UART0_IRQn);
