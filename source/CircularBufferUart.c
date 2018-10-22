@@ -9,7 +9,7 @@
 #include <fsl_clock.h>
 #include <fsl_lpsci.h>
 #include <stdint.h>
-#include "utils/CircularBuffer.h"
+
 
 lpsci_config_t user_config;
 
@@ -26,24 +26,23 @@ void UART0_IRQHandler(void) {
 	if ((base->S1 & kLPSCI_TxDataRegEmptyFlag)) {
 		int c = bufferRead(&cBuffer, &pcBuffer, 1);
 		if (c > 0) {
-			LPSCI_WriteBlocking(UART0, &pcBuffer, 1);
+//			LPSCI_WriteBlocking(UART0, &pcBuffer, 1);
+			UART0->D = pcBuffer;
+		}else{
+			/* Disable TX register empty interrupt. */
+//			base->C2 &= ~UART0_C2_TIE_MASK;
+			LPSCI_DisableInterrupts(base, kLPSCI_TxDataRegEmptyInterruptEnable);
 		}
 		LPSCI_ClearStatusFlags(base, kLPSCI_TxDataRegEmptyFlag);
 	}
 
-	if(base->S1 & kLPSCI_RxOverrunFlag){
-
-	}
-	LPSCI_ClearStatusFlags(base, kLPSCI_AllInterruptsEnable);
 }
 
 // Redefine __sys_write to handle printf output
 int __sys_write(int iFileHandle, char *pcBuffer, int iLength) {
 	// Write String to BUFFER
 	int size = bufferWrite(&cBuffer, (uint8_t *)pcBuffer, iLength);
-	bufferRead(&cBuffer, (uint8_t *) pcBuffer, 1);
-	LPSCI_WriteBlocking(UART0, (const uint8_t *) pcBuffer, 1);
-
+	LPSCI_EnableInterrupts(UART0, kLPSCI_TxDataRegEmptyInterruptEnable /* kLPSCI_TransmissionCompleteInterruptEnable | kLPSCI_RxOverrunInterruptEnable*/);
 	return iLength - size;
 
 }
@@ -58,7 +57,7 @@ void CBufferUart_Init() {
 
 	LPSCI_Init(UART0, &user_config, CLOCK_GetFreq(kCLOCK_PllFllSelClk));
 	LPSCI_DisableInterrupts(UART0, kLPSCI_AllInterruptsEnable);
-	LPSCI_EnableInterrupts(UART0, kLPSCI_TransmissionCompleteInterruptEnable | kLPSCI_RxOverrunInterruptEnable);
+
 
 	/* Enable interrupt in NVIC. */
 	EnableIRQ(UART0_IRQn);

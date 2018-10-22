@@ -8,8 +8,10 @@
 #ifndef CIRCULARBUFFERUART_H_
 #define CIRCULARBUFFERUART_H_
 #include <stdio.h>
+#include <utils/CircularBuffer.h>
 
 #define _bufferUartSize 20
+extern buffer_t cBuffer;
 
 void CBufferUart_Init();
 

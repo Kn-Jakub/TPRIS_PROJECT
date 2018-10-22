@@ -34,6 +34,7 @@
  */
 #include <CircularBufferUart.h>
 #include <stdio.h>
+#include <utils/CircularBuffer.h>
 #include "board.h"
 #include "peripherals.h"
 #include "pin_mux.h"
@@ -63,7 +64,9 @@ int main(void) {
     CBufferUart_Init();
 
     printf("Hello World\n");
-
+    int x=0;
+//    while(bufferBytesFree(&cBuffer) != bufferCapacity(&cBuffer)){x++;};
+    printf("Next Line %d\n",x);
 
 
     /* Force the counter to be placed into memory. */
