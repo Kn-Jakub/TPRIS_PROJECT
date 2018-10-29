@@ -10,6 +10,8 @@
 #include <fsl_lpsci.h>
 #include <stdint.h>
 #include <ctype.h>
+#include <assert.h>
+
 
 lpsci_config_t user_config;
 
@@ -19,7 +21,8 @@ uint8_t shadowBuffer[_bufferUartSize];
 uint8_t shadowOutputBuffer[_bufferUartSize];
 buffer_t cBuffer;
 buffer_t outBuffer;
-static fn_new_command_callack _callback;
+
+static callBack_struct_t* callBack_struct_pt;
 
 void UART0_IRQHandler(void) {
 	UART0_Type *base = UART0;
@@ -61,11 +64,13 @@ void UART0_IRQHandler(void) {
 		static uint8_t size = 0;
 		rxData = base->D;
 		if (rxData == '\n' || rxData == '\r') {
-			_callback(&outBuffer, size);
+			callBack_struct_pt->callbackHandler(&outBuffer, size,
+					callBack_struct_pt->data);
 			size = 0;
 		} else {
 			size++;
 			if (isalnum(rxData))
+
 				bufferWrite(&outBuffer, &rxData, 1);
 		}
 
@@ -84,9 +89,12 @@ int __sys_write(int iFileHandle, char *pcBuffer, int iLength) {
 
 }
 
-void CBufferUart_Init() {
+void CBufferUart_Init(callBack_struct_t* _callBack_struct_pt) {
 	bufferInit(&cBuffer, shadowBuffer, sizeof(shadowBuffer));
 	bufferInit(&outBuffer, shadowOutputBuffer, sizeof(shadowOutputBuffer));
+
+	assert(_callBack_struct_pt != NULL);
+	callBack_struct_pt = _callBack_struct_pt;
 
 	LPSCI_GetDefaultConfig(&user_config);
 	user_config.baudRate_Bps = 115200U;
@@ -104,7 +112,7 @@ void CBufferUart_Init() {
 
 }
 
-void setNewCommandCallBack(fn_new_command_callack _fn) {
-	assert(_fn != NULL);
-	_callback = _fn;
+void setNewCommandCallBack(callBack_struct_t* _callBack_struct_pt) {
+	assert(_callBack_struct_pt != NULL);
+	callBack_struct_pt = _callBack_struct_pt;
 }

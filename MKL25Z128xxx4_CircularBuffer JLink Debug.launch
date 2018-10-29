@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.nxp.mcuxpresso.core.debug.support.segger.launchConfigurationType">
-<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="JLink621000000"/>
+<stringAttribute key="InstructionTraceInfo" value="eJydVF1v2jAUfZ+0/2D5vSMfJASpWRVCoiElwBK3PCI3GMiaD5TYa7tfP5s4ECCtpvEU7HOO77n32PcPb3kGfpOqTsvChuo3BQJSJOUmLXY2fET+nQUfvn/9ck9oTujzlFCcZrVYQLjaEeoTTFlFahDiX2X11OpwlTAtLhcagg39yPNi1wm8daisl8FjDIWch8IJrglwNhsuV9vwToVgyT9JQQV9IEDTFboCGbppmaalmh3wFmc1aQizT1U7QA9NbpVNRTFGHyiHNwTNtIa6MTS6BFqxFs+b90r7KKpuKr0UVOGE+KwoSHZZlzE2h1Y/hx/jlhWJ092eumV+KAsOAM5qNkU/+HiHEDgJZTiLI5xP3inhiqqpW2Kd0TIiNctJ6xOIanv9uXtWvMTpHw5VFY2T3TookxcbzlmWNd8Q/GS4oqSKD9yFDYfK2ISyceuJE3vgCWeMb5wn2PZ1vVzEMzRbzFuIqmlj7bwdOjHyotOmrp63/GCxajc03dBkbga9bTmPpadlPd6bQfVZ5RIR2cWUy/Cs/vcPyoxv20slirg4XQISXiauMD+vBnOWP5OK222sxuxwKHnfN8DNDyGmyf40Tvc9yYhbsoIKfLMoKMK0vNhgiikW/2WmQJAWL+pJIcRvIa65eTHz9mDZ434VSfwHGTnFwcnA0esrXVblNs34cyQrr2UP1i6KglMIzNFopLUZGnxEG3SaKyMjlNCkqyUCOVLGqnbOTm9Erq7oDYBch6hzc3tCdOxhjPy2jDa6nx/RQC6e4uPS5XP9F0cXyuQAAAAAAAAA"/>
+<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="JLink123456"/>
 <booleanAttribute key="com.crt.ctrlcenter.saveState" value="true"/>
-<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB 621000000"/>
+<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB 123456"/>
 <intAttribute key="com.nxp.mcuxpresso.core.debug.support.segger.launches.JLinkLaunchConfigHandler.version" value="1"/>
+<booleanAttribute key="com.nxp.mcuxpresso.flash.clear.console" value="true"/>
+<booleanAttribute key="com.nxp.mcuxpresso.flash.confirm" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.manufacturer" value="SEGGER"/>
-<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="J-Link OpenSDA"/>
+<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="J-Link"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.type" value="USB"/>
+<stringAttribute key="com.nxp.mcuxpresso.jlink.flash.base.address" value="0x0"/>
+<stringAttribute key="com.nxp.mcuxpresso.jlink.flash.executable" value="hex"/>
+<booleanAttribute key="com.nxp.mcuxpresso.jlink.flash.halt.target" value="true"/>
+<booleanAttribute key="com.nxp.mcuxpresso.jlink.flash.reset.target" value="true"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.auto.startup" value="auto"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.device" value="MKL25Z128xxx4"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.endian" value="little"/>
@@ -18,7 +25,7 @@
 <intAttribute key="com.nxp.mcuxpresso.segger.port" value="2331"/>
 <booleanAttribute key="com.nxp.mcuxpresso.segger.powertarget 50" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.rtos" value="false;GDBServer/RTOSPlugin_FreeRTOS"/>
-<stringAttribute key="com.nxp.mcuxpresso.segger.select" value="USB=621000000"/>
+<stringAttribute key="com.nxp.mcuxpresso.segger.select" value="USB=123456"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.silent" value="-nosilent"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.singlerun" value="-singlerun"/>
 <stringAttribute key="com.nxp.mcuxpresso.segger.speed" value="auto"/>
@@ -40,6 +47,7 @@
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadSymbols" value="true"/>
 <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.pcRegister" value=""/>
 <intAttribute key="org.eclipse.cdt.debug.gdbjtag.core.portNumber" value="2331"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.runCommands" value=""/>
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setPcRegister" value="false"/>
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setResume" value="false"/>
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.setStopAt" value="true"/>
@@ -61,6 +69,12 @@
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="MKL25Z128xxx4_CircularBuffer"/>
 <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.crt.advproject.config.exe.debug.2024254952"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/MKL25Z128xxx4_CircularBuffer"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
 <mapAttribute key="org.eclipse.debug.core.preferred_launchers">
 <mapEntry key="[debug]" value="com.nxp.mcuxpresso.core.debug.support.segger.dsfLaunchDelegate"/>
 </mapAttribute>

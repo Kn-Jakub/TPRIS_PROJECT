@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InstructionTraceConfig>
+<TargetFeatures MajorVersion="0" MinorVersion="0" Target="FREESCALE_M0_PLUS">
+<ETMBase Address="-1" Present="0"/>
+<DWTBase Address="-536866816" Present="false"/>
+<ITMBase Address="-1" Present="false"/>
+<ETBBase Address="-536600576" Present="false"/>
+<MTBBase Address="-268435456" Present="true"/>
+<MtbDwtBase Address="-268431360" Present="true"/>
+<TraceFunnel Address="-536596480" Present="true"/>
+<MtbCoreSightComponent AWIDTH="14" ActualSRamBytes="16384" AutoResume="false" BaseAddress="-268435456" ChunkSize="1024" CsLock="NullCsLock" QuarterSpace="4096">
+<MTB_BASE Value="536866816"/>
+<MTB_POSITION Value="12288"/>
+<MTB_MASTER Value="-2147483517"/>
+<MTB_FLOW Value="12408"/>
+</MtbCoreSightComponent>
+<MtbDwtCoreSightComponent BaseAddress="-268431360" CsLock="NullCsLock" DwtRegStore="0000000000000000000000000000000000000000000000000000000000">
+<DWTfeatures Base="-268431360">
+<DWTcomparators Number="2"/>
+<Supported CmpMatch="false" CycleCounter="false">
+<CompDetails DataComp="true" Link1="false" MaxMask="24" Number="0"/>
+<CompDetails DataComp="false" Link1="false" MaxMask="24" Number="1"/>
+</Supported>
+<DwtProfilingCounters>
+<DWT_CTRL Value="16777216"/>
+</DwtProfilingCounters>
+</DWTfeatures>
+<MTBDWT_TBCTRL Value="536870912"/>
+</MtbDwtCoreSightComponent>
+<TraceFunnelCoreSightComponenet BaseAddress="-536596480" CsLock="NullCsLock">
+<CSTF Value="0"/>
+</TraceFunnelCoreSightComponenet>
+</TargetFeatures>
+</InstructionTraceConfig>

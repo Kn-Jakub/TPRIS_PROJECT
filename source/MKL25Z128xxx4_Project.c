@@ -50,11 +50,11 @@
  * @brief   Application entry point.
  */
 
-void process_command_callback(buffer_t* commandBuffer, uint8_t newCommandSize) {
+void process_command_callback(buffer_t* commandBuffer, uint8_t newCommandSize, void *data) {
 	uint8_t command[newCommandSize + 1];
 	bufferRead(commandBuffer, command, newCommandSize);
 	command[newCommandSize] = 0;
-	PRINTF("New command: %s", command);
+	PRINTF("New command: %s\n\r", command);
 }
 
 int main(void) {
@@ -65,9 +65,14 @@ int main(void) {
 	BOARD_InitBootPeripherals();
 	/* Init FSL debug console. */
 	BOARD_InitDebugConsole();
+	callBack_struct_t my_callBack_struct;
 
-	CBufferUart_Init();
-	setNewCommandCallBack(&process_command_callback);
+
+	my_callBack_struct.callbackHandler=&process_command_callback;
+	my_callBack_struct.data = NULL;
+
+	CBufferUart_Init(&my_callBack_struct);
+
 
 	printf("Hello World\n");
 	int x = 0;
