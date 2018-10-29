@@ -27,7 +27,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
- 
+
 /**
  * @file    MKL25Z128xxx4_Project.c
  * @brief   Application entry point.
@@ -50,30 +50,35 @@
  * @brief   Application entry point.
  */
 
-
+void process_command_callback(buffer_t* commandBuffer, uint8_t newCommandSize) {
+	uint8_t command[newCommandSize + 1];
+	bufferRead(commandBuffer, command, newCommandSize);
+	command[newCommandSize] = 0;
+	PRINTF("New command: %s", command);
+}
 
 int main(void) {
 
-  	/* Init board hardware. */
-    BOARD_InitBootPins();
-    BOARD_InitBootClocks();
-    BOARD_InitBootPeripherals();
-  	/* Init FSL debug console. */
-    BOARD_InitDebugConsole();
+	/* Init board hardware. */
+	BOARD_InitBootPins();
+	BOARD_InitBootClocks();
+	BOARD_InitBootPeripherals();
+	/* Init FSL debug console. */
+	BOARD_InitDebugConsole();
 
-    CBufferUart_Init();
+	CBufferUart_Init();
+	setNewCommandCallBack(&process_command_callback);
 
-    printf("Hello World\n");
-    int x=0;
+	printf("Hello World\n");
+	int x = 0;
 //    while(bufferBytesFree(&cBuffer) != bufferCapacity(&cBuffer)){x++;};
-    printf("Next Line %d\n",x);
+	printf("Next Line %d\n", x);
 
-
-    /* Force the counter to be placed into memory. */
-    volatile static int i = 0 ;
-    /* Enter an infinite loop, just incrementing a counter. */
-    while(1) {
-        i++ ;
-    }
-    return 0 ;
+	/* Force the counter to be placed into memory. */
+	volatile static int i = 0;
+	/* Enter an infinite loop, just incrementing a counter. */
+	while (1) {
+		i++;
+	}
+	return 0;
 }

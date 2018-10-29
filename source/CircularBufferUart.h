@@ -13,7 +13,11 @@
 #define _bufferUartSize 20
 extern buffer_t cBuffer;
 
-void CBufferUart_Init();
 
+typedef void (*fn_new_command_callack)(buffer_t* commandBuffer,
+		uint8_t newCommandSize);
+
+void CBufferUart_Init();
+void setNewCommandCallBack(fn_new_command_callack _fn);
 
 #endif /* CIRCULARBUFFERUART_H_ */
